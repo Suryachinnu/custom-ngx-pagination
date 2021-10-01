@@ -43,33 +43,33 @@ export class ViewContactsComponent implements OnInit {
     this.contactIndexToBeDeleted = index;
   }
 
-  createRange(lastPage: number): any {
-    let paginationArray: any = [];
-    for (let i = 0; i < lastPage; i++) {
-      const page = {
-        label: `${ i + 1}`,
-        value: i + 1
-      };
-      paginationArray.push(page);
-    }
-    return paginationArray;
-  }
+  // createRange(lastPage: number): any {
+  //   let paginationArray: any = [];
+  //   for (let i = 0; i < lastPage; i++) {
+  //     const page = {
+  //       label: `${ i + 1}`,
+  //       value: i + 1
+  //     };
+  //     paginationArray.push(page);
+  //   }
+  //   return paginationArray;
+  // }
 
-  getStartIndex(currentPage: number, lastPage: number): string {
-    let firstIndex = 1;
-    if((currentPage !== lastPage) || (currentPage > 0 && lastPage > 0)) {
-      firstIndex = (Number(this.noOfRows) * (Number(currentPage) -1) + 1);
-    }
-    return firstIndex.toString();
-  }
+  // getStartIndex(currentPage: number, lastPage: number): string {
+  //   let firstIndex = 1;
+  //   if((currentPage !== lastPage) || (currentPage > 0 && lastPage > 0)) {
+  //     firstIndex = (Number(this.noOfRows) * (Number(currentPage) -1) + 1);
+  //   }
+  //   return firstIndex.toString();
+  // }
 
-  getLastIndex(currentPage: number, lastPage: number): string {
-    let lastIndex = this.contacts ? this.contacts.length : null;
-    if((currentPage !== lastPage)) {
-      lastIndex = (Number(this.noOfRows) * (Number(currentPage)));
-    }
-    return lastIndex.toString();
-  }
+  // getLastIndex(currentPage: number, lastPage: number): string {
+  //   let lastIndex = this.contacts ? this.contacts.length : null;
+  //   if((currentPage !== lastPage)) {
+  //     lastIndex = (Number(this.noOfRows) * (Number(currentPage)));
+  //   }
+  //   return lastIndex.toString();
+  // }
 
   removeDeletionIndex(){
     this.contactIndexToBeDeleted = undefined;

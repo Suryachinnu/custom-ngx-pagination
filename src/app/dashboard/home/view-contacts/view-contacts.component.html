@@ -34,53 +34,59 @@
       </thead>
       <tbody>
         <tr class="pagination-row">
-          <td colspan="3">
-            <pagination-template #p="paginationApi" (pageChange)="page = $event">
-              <div class="row no-gutters">
-                <div class="col-md-4 no-padding">
-                  <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                  </svg></span>
-                  <span>Viewing {{getStartIndex(p.getCurrent(), p.getLastPage())}}-{{getLastIndex(p.getCurrent(), p.getLastPage())}} of {{contacts?.length}}</span>
-                </div>
-                <div class="col-md-8 no-padding">
-                  <div class="custom-pagination">
-                    <div class="pagination-icon pagination-previous">
-                      <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
-                        </svg>
-                      </span>
-                    </div>
-                    <div class="page-number">
-                      <span>Pg</span>
-                      <span>
-                        <select name="pageToggle" id="pageToggle" [(ngModel)]="page">
-                          <ng-container *ngFor="let item of createRange(p.getLastPage())">
-                            <option (click)="page = item.value" [value]="item.value">{{item.value}}</option>
-                          </ng-container>
-                        </select>
-                      </span>
-                      <span>of {{p.getLastPage()}}</span>
-                    </div>
-                    <div class="pagination-icon pagination-next">
-                      <span *ngIf="!p.isLastPage()" (click)="p.next()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
-                        </svg>
-                      </span>
-                    </div>
-                    <div class="page-number">
-                      <select name="noOfRowsVisible" (change)="page = 1" [(ngModel)]="noOfRows">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </pagination-template>
+          <td colspan="3">   
+            <pagination-template #p="paginationApi" (pageChange)="page = $event">          
+              <nav aria-label="Pagination" class="usa-pagination">
+                <ul class="usa-pagination__list">
+                  <li class="usa-pagination__item usa-pagination__arrow" *ngIf="!p.isFirstPage()" 
+                  [class.disabled]="p.isFirstPage()" (click)="p.previous()">
+                    <a
+                      href="javascript:void(0);"
+                      class="usa-pagination__link usa-pagination__previous-page"
+                      aria-label="Previous page"
+                    >
+                      <svg class="usa-icon" aria-hidden="true" role="img">
+                        <use xlink:href="/assets/img/sprite.svg#navigate_before"></use>
+                      </svg>
+              
+                      <span class="usa-pagination__link-text"> Previous </span>
+                    </a>
+                  </li>
+              
+                  <li class="usa-pagination__item usa-pagination__page-no"  *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                    <a
+                      href="javascript:void(0);"
+                      class="usa-pagination__button"
+                      aria-label="Page 1"
+                      (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value"
+                    >
+                      {{page.label}}
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      class="usa-pagination__button usa-current"
+                      aria-label="Page 1" *ngIf="p.getCurrent() === page.value"
+                    >
+                      {{page.label}}
+                    </a>
+                  </li>
+                  <li class="usa-pagination__item usa-pagination__arrow"  [class.disabled]="p.isLastPage()">
+                    <a
+                      href="javascript:void(0);"
+                      class="usa-pagination__link usa-pagination__next-page"
+                      aria-label="Next page"
+                      *ngIf="!p.isLastPage()" (click)="p.next()"
+                    >
+                      <span class="usa-pagination__link-text"> Next </span>
+              
+                      <svg class="usa-icon" aria-hidden="true" role="img">
+                        <use xlink:href="/assets/img/sprite.svg#navigate_next"></use>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+           </pagination-template>
           </td>
           <td></td>
           <td></td>

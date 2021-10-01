@@ -14,13 +14,12 @@ import { ContactListService } from './Services/contact-list.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 
-
 @NgModule({
   declarations: [
     ContactPipe,
     HomeComponent,
     ViewContactsComponent,
-    AddEditContactComponent
+    AddEditContactComponent,
   ],
   imports: [
     CommonModule,
